@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
+// import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Quest from "./components/Quest";
 
 export default function App() {
@@ -24,13 +24,6 @@ export default function App() {
     setQuestItems([...questItems, quest]);
     setQuest(null);
   };
-
-  // let textLog = '';
-  // if (timesPressed > 1) {
-  //   textLog = timesPressed + 'x onPress';
-  // } else if (timesPressed > 0) {
-  //   textLog = 'onPress';
-  // }
 
   const completeQuest = (index) => {
     let itemsCopy = [...questItems];
@@ -55,22 +48,18 @@ export default function App() {
               {/* This is where quests will go */}
               {questItems.map((item, index) => {
                 return (
-                  <BouncyCheckbox
-                    isChecked={false}
-                    color="#FFF"
-                    fontFamily="PressStart2P"
-                    fillColor="transparent"
-                    borderRadius="0"
-                    borderColor="#FFF"
-                    borderWidth="3"
-                    text={item}
-                  />
-                  // <TouchableOpacity
-                  //   key={index}
-                  //   onPress={() => completeQuest(index)}
-                  // >
-                  //   <Quest text={item} />
-                  // </TouchableOpacity>
+                  // <Quest text={item} />
+                  <View style={styles.questList}>
+                    <Quest text={item} />
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => completeQuest(index)}
+                    >
+                      <View style={styles.deleteWrapper}>
+                        <Text style={styles.deleteText}>x</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
                 );
               })}
             </View>
@@ -108,6 +97,13 @@ const styles = StyleSheet.create({
   questsWrapper: {
     paddingTop: 50,
     paddingHorizontal: 20,
+  },
+  questList: {
+    padding: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    maxWidth: "90%",
   },
   sectionTitle: {
     fontSize: 24,
@@ -153,6 +149,20 @@ const styles = StyleSheet.create({
   addText: {
     color: "#FFF",
     fontSize: 18,
+    fontFamily: "PressStart2P",
+  },
+  deleteWrapper: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#E56F5A",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#000",
+    borderWidth: 3,
+  },
+  deleteText: {
+    color: "#FFF",
+    fontSize: 16,
     fontFamily: "PressStart2P",
   },
 });

@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import AppLoading from "expo-app-loading";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useFonts } from "expo-font";
 
 const Quest = (props) => {
@@ -13,11 +14,17 @@ const Quest = (props) => {
   } else {
     return (
       <View style={styles.item}>
-        <View style={styles.itemLeft}>
-          <Text style={styles.square}>{props.tick}</Text>
-          <Text style={styles.itemText}>{props.text}</Text>
-        </View>
-        {/* <View style={styles.circular}></View> */}
+        <BouncyCheckbox
+          style={styles.checkbox}
+          isChecked={false}
+          color="#FFF"
+          fontFamily="PressStart2P"
+          fillColor="transparent"
+          borderRadius="0"
+          borderColor="#FFF"
+          borderWidth="3"
+          text={props.text}
+        />
       </View>
     );
   }
@@ -25,26 +32,13 @@ const Quest = (props) => {
 
 const styles = StyleSheet.create({
   item: {
-    padding: 15,
+    padding: 5,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 10,
   },
-  itemLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
-  square: {
-    fontFamily: "PressStart2P",
-    width: 24,
-    height: 24,
-    color: "#FFF",
-    borderColor: "#FFF",
-    borderWidth: 3,
-    padding: 3,
-    marginRight: 15,
+  checkbox: {
+    flex: 1,
   },
   itemText: {
     fontFamily: "PressStart2P",
@@ -52,13 +46,20 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 16,
   },
-  //   circular: {
-  //     width: 12,
-  //     height: 12,
-  //     borderColor: "#94CB4B",
-  //     borderWidth: 2,
-  //     borderRadius: 5,
-  //   },
+  deleteWrapper: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#E56F5A",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#000",
+    borderWidth: 3,
+  },
+  deleteText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontFamily: "PressStart2P",
+  },
 });
 
 export default Quest;
